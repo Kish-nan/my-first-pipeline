@@ -13,8 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-     
-        - name: Scan for hardcoded secrets
+      - name: Scan for hardcoded secrets
         if: github.event_name == 'pull_request'
         uses: trufflesecurity/trufflehog@main
         with:
@@ -22,7 +21,6 @@ jobs:
           base: ${{ github.event.pull_request.base.ref }}
           head: ${{ github.event.pull_request.head.ref }}
           extra_args: --only-verified
-
 
       - name: Print deployment message
         run: echo "Code passed checks - ready to deploy"
